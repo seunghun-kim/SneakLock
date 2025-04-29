@@ -6,6 +6,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.GameOptions;
+import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +43,8 @@ public class SneaklockClient implements ClientModInitializer {
             if (currentBothShifts && !bothShiftsPressed) {
                 sneakLocked = !sneakLocked;
                 LOGGER.info("Sneak lock toggled: {}", sneakLocked ? "ON" : "OFF");
+                // Send action bar message to player
+                player.sendMessage(Text.literal("Sneak Lock: " + (sneakLocked ? "§aON" : "§cOFF")), true);
             }
 
             // Update previous state
