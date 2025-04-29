@@ -2,6 +2,8 @@
 
 A simple Minecraft mod that allows you to lock your sneak state.
 
+⚠️ **Important**: This mod requires [Fabric API](https://modrinth.com/mod/fabric-api). The game will crash without it.
+
 ## Features
 
 - Toggle sneak lock by pressing both shift keys simultaneously
@@ -23,4 +25,4 @@ A simple Minecraft mod that allows you to lock your sneak state.
 ## Requirements
 
 - Minecraft (Fabric)
-- Fabric API 
+- [Fabric API](https://modrinth.com/mod/fabric-api) (Required - mod will not work without it) 
