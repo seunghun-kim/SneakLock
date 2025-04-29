@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "sneaklock",
+  "version": "${version}",
+  "name": "SneakLock",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/sneaklock/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "org.teamck.sneaklock.client.SneaklockDataGenerator"
+    ],
+    "client": [
+      "org.teamck.sneaklock.client.SneaklockClient"
+    ],
+    "main": [
+      "org.teamck.sneaklock.Sneaklock"
+    ]
+  },
+  "mixins": [
+    "sneaklock.mixins.json",
+    {
+      "config": "sneaklock.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
