@@ -20,18 +20,26 @@ public class KeyBindingMixin {
     @Inject(method = "isPressed", at = @At("HEAD"), cancellable = true)
     private void onIsPressed(CallbackInfoReturnable<Boolean> cir) {
         KeyBinding self = (KeyBinding)(Object)this;
-        if (SneaklockClient.isSneakLocked() && self.getTranslationKey().equals("key.jump")) {
-            boolean currentlyPressed = self.wasPressed();
-            if (currentlyPressed && !wasPressed) {
-                LOGGER.info("Jump key pressed while sneak lock is active");
-                // Get the client instance and check if player exists
-                MinecraftClient client = MinecraftClient.getInstance();
-                if (client.player != null) {
-                    client.player.sendMessage(Text.literal("§cJump cancelled - Sneak Lock active"), true);
+        String key = self.getTranslationKey();
+        
+        if (SneaklockClient.isSneakLocked()) {
+            // Handle jump key
+            if (key.equals("key.jump")) {
+                boolean currentlyPressed = self.wasPressed();
+                if (currentlyPressed && !wasPressed) {
+                    LOGGER.info("Jump key pressed while sneak lock is active");
+                    MinecraftClient client = MinecraftClient.getInstance();
+                    if (client.player != null) {
+                        client.player.sendMessage(Text.literal("§cJump cancelled - Sneak Lock active"), true);
+                    }
                 }
+                wasPressed = currentlyPressed;
+                cir.setReturnValue(false);
             }
-            wasPressed = currentlyPressed;
-            cir.setReturnValue(false);
+            // Handle sneak key - force it to be pressed when locked
+            else if (key.equals("key.sneak")) {
+                cir.setReturnValue(true);
+            }
         }
     }
 } 
