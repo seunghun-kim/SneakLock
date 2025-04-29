@@ -3,10 +3,12 @@
   "id": "sneaklock",
   "version": "${version}",
   "name": "SneakLock",
-  "description": "",
-  "authors": [],
+  "description": "Toggle sneak with both shift keys and prevent jumping while sneaking",
+  "authors": [
+    "Seunghun Kim"
+  ],
   "contact": {},
-  "license": "All-Rights-Reserved",
+  "license": "MIT",
   "icon": "assets/sneaklock/icon.png",
   "environment": "client",
   "entrypoints": {

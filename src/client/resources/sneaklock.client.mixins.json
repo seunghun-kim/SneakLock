@@ -4,6 +4,7 @@
   "package": "org.teamck.sneaklock.mixin.client",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "KeyBindingMixin"
   ],
   "injectors": {
     "defaultRequire": 1
