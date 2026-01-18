@@ -28,9 +28,9 @@ public class SneaklockClient implements ClientModInitializer {
             if (client.player == null) return;
 
             // Check left shift state
-            boolean currentLeftShift = InputUtil.isKeyPressed(client.getWindow().getHandle(), GLFW.GLFW_KEY_LEFT_SHIFT);
+            boolean currentLeftShift = InputUtil.isKeyPressed(client.getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT);
             // Check right shift state
-            boolean currentRightShift = InputUtil.isKeyPressed(client.getWindow().getHandle(), GLFW.GLFW_KEY_RIGHT_SHIFT);
+            boolean currentRightShift = InputUtil.isKeyPressed(client.getWindow(), GLFW.GLFW_KEY_RIGHT_SHIFT);
             
             // Check if both shifts are currently pressed
             boolean currentBothShifts = currentLeftShift && currentRightShift;
