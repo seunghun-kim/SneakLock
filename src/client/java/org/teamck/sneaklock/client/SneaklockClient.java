@@ -1,11 +1,9 @@
 package org.teamck.sneaklock.client;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,16 +20,16 @@ public class SneaklockClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         LOGGER.info("SneakLock initialized");
-        
+
         // Register the client tick event
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null) return;
 
             // Check left shift state
-            boolean currentLeftShift = InputUtil.isKeyPressed(client.getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT);
+            boolean currentLeftShift = InputConstants.isKeyDown(client.getWindow(), GLFW.GLFW_KEY_LEFT_SHIFT);
             // Check right shift state
-            boolean currentRightShift = InputUtil.isKeyPressed(client.getWindow(), GLFW.GLFW_KEY_RIGHT_SHIFT);
-            
+            boolean currentRightShift = InputConstants.isKeyDown(client.getWindow(), GLFW.GLFW_KEY_RIGHT_SHIFT);
+
             // Check if both shifts are currently pressed
             boolean currentBothShifts = currentLeftShift && currentRightShift;
 
@@ -40,7 +38,7 @@ public class SneaklockClient implements ClientModInitializer {
                 sneakLocked = !sneakLocked;
                 LOGGER.info("Sneak lock toggled: {}", sneakLocked ? "ON" : "OFF");
                 // Send action bar message to player
-                client.player.sendMessage(Text.literal("Sneak Lock: " + (sneakLocked ? "§aON" : "§cOFF")), true);
+                client.player.sendOverlayMessage(Component.literal("Sneak Lock: " + (sneakLocked ? "§aON" : "§cOFF")));
             }
 
             // Update previous state
